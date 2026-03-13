@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <title>LANdroid</title>
@@ -109,88 +110,3 @@ Show Shared Files
 <div class="button" onclick="scanNetwork()">
 Scan Network
 </div>
-
-<div id="networkList"></div>
-
-</div>
-
-<div class="card">
-
-<h3>⚙ Settings</h3>
-
-<p>LANdroid configuration panel</p>
-
-</div>
-
-<div id="status"></div>
-
-</div>
-
-<div class="footer">
-LANdroid Mobile NAS
-</div>
-
-<script>
-
-let sharedFiles=[]
-
-function shareFile(){
-
-let file=document.getElementById("fileInput").files[0]
-
-if(!file){
-alert("Select a file first")
-return
-}
-
-sharedFiles.push(file)
-
-alert("File added: "+file.name)
-
-}
-
-function showDownloads(){
-
-let html="<h3>Shared Files</h3>"
-
-if(sharedFiles.length===0){
-html+="<p>No files shared</p>"
-}
-
-sharedFiles.forEach(file=>{
-
-let url=URL.createObjectURL(file)
-
-html+=`
-<div>
-📄 ${file.name}
-<a href="${url}" download>Download</a>
-</div>
-`
-
-})
-
-document.getElementById("status").innerHTML=html
-
-}
-
-function scanNetwork(){
-
-let html="<h3>Devices on Network</h3>"
-
-html+=`
-<p>192.168.1.1 — Router</p>
-<p>192.168.1.12 — Laptop</p>
-<p>192.168.1.15 — Smart TV</p>
-<p>192.168.1.22 — Phone</p>
-`
-
-document.getElementById("networkList").innerHTML=html
-
-}
-
-</script>
-
-</body>
-
-</html>
