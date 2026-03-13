@@ -126,7 +126,16 @@ function updateList(){
 let html = "<h3>Shared files</h3>"
 
 sharedFiles.forEach((file,i)=>{
-html += "<p>📄 " + file.name + "</p>"
+
+let url = URL.createObjectURL(file)
+
+html += `
+<div style="margin:10px 0;">
+📄 ${file.name}
+<a href="${url}" download style="margin-left:10px;color:#38bdf8;">Download</a>
+</div>
+`
+
 })
 
 document.getElementById("status").innerHTML = html
@@ -134,6 +143,7 @@ document.getElementById("status").innerHTML = html
 }
 
 </script>
+
 
 <div class="card">
 📥 Download Files
