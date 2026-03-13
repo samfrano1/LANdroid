@@ -3,33 +3,46 @@
 <head>
 <title>LANdroid</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
 
 body{
 font-family: Arial;
 background:#0f172a;
 color:white;
-text-align:center;
-padding:30px;
+margin:0;
 }
 
-h1{
+.header{
+background:#1e293b;
+padding:20px;
+text-align:center;
+font-size:24px;
+font-weight:bold;
 color:#38bdf8;
 }
 
-.box{
-background:#1e293b;
+.container{
 padding:20px;
-border-radius:10px;
-margin:20px;
 }
 
-button{
-background:#38bdf8;
-border:none;
-padding:12px 20px;
-border-radius:8px;
-font-size:16px;
+.card{
+background:#1e293b;
+padding:20px;
+margin-bottom:15px;
+border-radius:12px;
+font-size:18px;
+}
+
+.card:hover{
+background:#334155;
+}
+
+.footer{
+text-align:center;
+padding:15px;
+color:#94a3b8;
+font-size:14px;
 }
 
 </style>
@@ -37,22 +50,36 @@ font-size:16px;
 
 <body>
 
-<h1>LANdroid</h1>
-
-<div class="box">
-<h3>Servidor LAN</h3>
-<p>Estado: Activo</p>
-<p>IP: 192.168.1.xxx</p>
+<div class="header">
+LANdroid 📡
 </div>
 
-<div class="box">
-<h3>Archivos compartidos</h3>
-<button>Explorar archivos</button>
+<div class="container">
+
+<div class="card">
+📂 File Explorer
 </div>
 
-<div class="box">
-<h3>Subir archivo</h3>
-<input type="file">
+<div class="card">
+📤 Upload Files
+</div>
+
+<div class="card">
+📥 Download Files
+</div>
+
+<div class="card">
+📡 Devices on Network
+</div>
+
+<div class="card">
+⚙ Settings
+</div>
+
+</div>
+
+<div class="footer">
+LANdroid Mobile NAS
 </div>
 
 </body>
