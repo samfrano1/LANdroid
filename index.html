@@ -138,6 +138,47 @@ document.getElementById("status").innerHTML = html
 <div class="card">
 📥 Download Files
 </div>
+  <script>
+
+let sharedFiles = []
+
+function shareFile(){
+
+let file = document.getElementById("fileInput").files[0]
+
+if(!file){
+document.getElementById("status").innerHTML = "Select a file"
+return
+}
+
+sharedFiles.push(file)
+
+updateList()
+
+}
+
+function updateList(){
+
+let html = "<h3>Shared files</h3>"
+
+sharedFiles.forEach((file,i)=>{
+
+let url = URL.createObjectURL(file)
+
+html += `
+<div style="margin:10px 0;">
+📄 ${file.name}
+<a href="${url}" download style="margin-left:10px;color:#38bdf8;">Download</a>
+</div>
+`
+
+})
+
+document.getElementById("status").innerHTML = html
+
+}
+
+  </script>
 
 <div class="card">
 📡 Devices on Network
