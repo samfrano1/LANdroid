@@ -1,54 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>LANdroid</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="manifest" href="manifest.json">
+
 <style>
 
 body{
-font-family: Arial;
+font-family:Arial;
 background:#0f172a;
 color:white;
 margin:0;
 }
 
 .header{
-  <div class="nas-panel">
-
-<h2>LANdroid NAS</h2>
-
-<p>Share files with devices in your network</p>
-
-<input type="file" id="fileInput">
-
-<button onclick="shareFile()">Share File</button>
-
-<div id="status"></div>
-
-</div>
-
-<script>
-
-function shareFile(){
-
-let file = document.getElementById("fileInput").files[0]
-
-if(!file){
-document.getElementById("status").innerHTML = "Select a file"
-return
-}
-
-document.getElementById("status").innerHTML =
-"File ready to share: " + file.name
-
-}
-
-</script>
 background:#1e293b;
 padding:20px;
 text-align:center;
-font-size:24px;
+font-size:28px;
 font-weight:bold;
 color:#38bdf8;
 }
@@ -58,25 +31,38 @@ padding:20px;
 }
 
 .card{
-background:#1e293b;
+background:#334155;
+border-radius:15px;
 padding:20px;
-margin-bottom:15px;
-border-radius:12px;
-font-size:18px;
+margin-bottom:20px;
 }
 
-.card:hover{
-background:#334155;
+.button{
+background:#1e293b;
+padding:18px;
+border-radius:12px;
+margin-top:10px;
+cursor:pointer;
+}
+
+.button:hover{
+background:#0f172a;
+}
+
+a{
+color:#38bdf8;
+text-decoration:none;
+margin-left:10px;
 }
 
 .footer{
 text-align:center;
-padding:15px;
+padding:20px;
 color:#94a3b8;
-font-size:14px;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -87,142 +73,56 @@ LANdroid 📡
 
 <div class="container">
 
-<a href="explorer.html" 
-style="text-decoration:none;color:white;">
 <div class="card">
-📂 File Explorer
-</div>
-</a>
-
-<div class="card">
-📤 Upload Files
-<div class="upload">
-  <h3>Upload file</h3>
-  <input type="file" id="fileInput">
-  <button onclick="uploadFile()">Send to LANdroid</button>
-</div>
-
-<script>
-
-let sharedFiles = []
-
-function shareFile(){
-
-let file = document.getElementById("fileInput").files[0]
-
-if(!file){
-document.getElementById("status").innerHTML = "Select a file"
-return
-}
-
-sharedFiles.push(file)
-
-updateList()
-
-}
-
-function updateList(){
-
-let html = "<h3>Shared files</h3>"
-
-sharedFiles.forEach((file,i)=>{
-
-let url = URL.createObjectURL(file)
-
-html += `
-<div style="margin:10px 0;">
-📄 ${file.name}
-<a href="${url}" download style="margin-left:10px;color:#38bdf8;">Download</a>
-</div>
-`
-
-})
-
-document.getElementById("status").innerHTML = html
-
-}
-
-</script>
-
-
-<div class="menu-button" onclick="showDownloads()">
-📥 Download Files
-</div>
-  <script>
-
-let sharedFiles = []
-
-function shareFile(){
-
-let file = document.getElementById("fileInput").files[0]
-
-if(!file){
-document.getElementById("status").innerHTML = "Select a file"
-return
-}
-
-sharedFiles.push(file)
-
-updateList()
-
-}
-
-function updateList(){
-
-let html = "<h3>Shared files</h3>"
-
-sharedFiles.forEach((file,i)=>{
-
-let url = URL.createObjectURL(file)
-
-html += `
-<div style="margin:10px 0;">
-📄 ${file.name}
-<a href="${url}" download style="margin-left:10px;color:#38bdf8;">Download</a>
-</div>
-`
-
-})
-
-document.getElementById("status").innerHTML = html
-
-}
-
-  </script>
-  function showDownloads(){
-
-let html = "<h3>Available files</h3>"
-
-if(sharedFiles.length === 0){
-html += "<p>No files shared</p>"
-}
-
-sharedFiles.forEach((file)=>{
-
-let url = URL.createObjectURL(file)
-
-html += `
-<div style="margin:10px 0;">
-📄 ${file.name}
-<a href="${url}" download style="margin-left:10px;color:#38bdf8;">
-Download
-</a>
-</div>
-`
-
-})
-
-document.getElementById("status").innerHTML = html
-
-}
-
-<div class="card">
-📡 Devices on Network
+<h3>📂 File Explorer</h3>
+<p>Explore files shared on LANdroid</p>
 </div>
 
 <div class="card">
-⚙ Settings
+
+<h3>📤 Upload Files</h3>
+
+<input type="file" id="fileInput">
+
+<br><br>
+
+<div class="button" onclick="shareFile()">
+Send to LANdroid
 </div>
+
+</div>
+
+<div class="card">
+
+<h3>📥 Download Files</h3>
+
+<div class="button" onclick="showDownloads()">
+Show Shared Files
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>📡 Devices on Network</h3>
+
+<div class="button" onclick="scanNetwork()">
+Scan Network
+</div>
+
+<div id="networkList"></div>
+
+</div>
+
+<div class="card">
+
+<h3>⚙ Settings</h3>
+
+<p>LANdroid configuration panel</p>
+
+</div>
+
+<div id="status"></div>
 
 </div>
 
@@ -230,5 +130,67 @@ document.getElementById("status").innerHTML = html
 LANdroid Mobile NAS
 </div>
 
+<script>
+
+let sharedFiles=[]
+
+function shareFile(){
+
+let file=document.getElementById("fileInput").files[0]
+
+if(!file){
+alert("Select a file first")
+return
+}
+
+sharedFiles.push(file)
+
+alert("File added: "+file.name)
+
+}
+
+function showDownloads(){
+
+let html="<h3>Shared Files</h3>"
+
+if(sharedFiles.length===0){
+html+="<p>No files shared</p>"
+}
+
+sharedFiles.forEach(file=>{
+
+let url=URL.createObjectURL(file)
+
+html+=`
+<div>
+📄 ${file.name}
+<a href="${url}" download>Download</a>
+</div>
+`
+
+})
+
+document.getElementById("status").innerHTML=html
+
+}
+
+function scanNetwork(){
+
+let html="<h3>Devices on Network</h3>"
+
+html+=`
+<p>192.168.1.1 — Router</p>
+<p>192.168.1.12 — Laptop</p>
+<p>192.168.1.15 — Smart TV</p>
+<p>192.168.1.22 — Phone</p>
+`
+
+document.getElementById("networkList").innerHTML=html
+
+}
+
+</script>
+
 </body>
+
 </html>
