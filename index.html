@@ -189,6 +189,32 @@ document.getElementById("status").innerHTML = html
 }
 
   </script>
+  function showDownloads(){
+
+let html = "<h3>Available files</h3>"
+
+if(sharedFiles.length === 0){
+html += "<p>No files shared</p>"
+}
+
+sharedFiles.forEach((file)=>{
+
+let url = URL.createObjectURL(file)
+
+html += `
+<div style="margin:10px 0;">
+📄 ${file.name}
+<a href="${url}" download style="margin-left:10px;color:#38bdf8;">
+Download
+</a>
+</div>
+`
+
+})
+
+document.getElementById("status").innerHTML = html
+
+}
 
 <div class="card">
 📡 Devices on Network
