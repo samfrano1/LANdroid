@@ -14,6 +14,37 @@ margin:0;
 }
 
 .header{
+  <div class="nas-panel">
+
+<h2>LANdroid NAS</h2>
+
+<p>Share files with devices in your network</p>
+
+<input type="file" id="fileInput">
+
+<button onclick="shareFile()">Share File</button>
+
+<div id="status"></div>
+
+</div>
+
+<script>
+
+function shareFile(){
+
+let file = document.getElementById("fileInput").files[0]
+
+if(!file){
+document.getElementById("status").innerHTML = "Select a file"
+return
+}
+
+document.getElementById("status").innerHTML =
+"File ready to share: " + file.name
+
+}
+
+</script>
 background:#1e293b;
 padding:20px;
 text-align:center;
