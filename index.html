@@ -103,15 +103,36 @@ style="text-decoration:none;color:white;">
 </div>
 
 <script>
-function uploadFile(){
-  const file = document.getElementById("fileInput").files[0];
-  if(!file){
-    alert("Select a file first");
-    return;
-  }
 
-  alert("File selected: " + file.name);
+let sharedFiles = []
+
+function shareFile(){
+
+let file = document.getElementById("fileInput").files[0]
+
+if(!file){
+document.getElementById("status").innerHTML = "Select a file"
+return
 }
+
+sharedFiles.push(file)
+
+updateList()
+
+}
+
+function updateList(){
+
+let html = "<h3>Shared files</h3>"
+
+sharedFiles.forEach((file,i)=>{
+html += "<p>📄 " + file.name + "</p>"
+})
+
+document.getElementById("status").innerHTML = html
+
+}
+
 </script>
 
 <div class="card">
