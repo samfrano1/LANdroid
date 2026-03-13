@@ -65,7 +65,23 @@ style="text-decoration:none;color:white;">
 
 <div class="card">
 📤 Upload Files
+<div class="upload">
+  <h3>Upload file</h3>
+  <input type="file" id="fileInput">
+  <button onclick="uploadFile()">Send to LANdroid</button>
 </div>
+
+<script>
+function uploadFile(){
+  const file = document.getElementById("fileInput").files[0];
+  if(!file){
+    alert("Select a file first");
+    return;
+  }
+
+  alert("File selected: " + file.name);
+}
+</script>
 
 <div class="card">
 📥 Download Files
